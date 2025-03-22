@@ -44,6 +44,23 @@ RAG works by:
     - Without RAG: AI guesses from memory. 
     - With RAG: AI checks facts first, then answers.
 
+## When to Use RAG
+
+RAG works best when:
+
+- You need answers from specific document sets
+- Information changes frequently
+- Accuracy and citations matter
+- You need to control the knowledge source
+
+RAG might not be needed when:
+
+- Questions are general knowledge
+- Data doesn't change often
+- Exact sources aren't important
+
+---
+
 ## The Two Parts of RAG
 
 RAG has two main components: **Retrieval** and **Generation**.
@@ -102,7 +119,30 @@ Large documents contain too much information to process all at once. RAG solves 
 
 Think of chunking like creating flashcards from a textbook. Each card holds just enough useful information. Not too little. Not too much.
 
+### Vector Databases: Where Meaning Is Stored
+
+RAG systems need special databases to store and search embeddings efficiently.
+
+**Vector databases** are specialized storage systems that:
+
+- Store thousands or millions of embeddings (numbers that represent meaning)
+- Find similar meanings very quickly
+- Return the most relevant information almost instantly
+
+Normal databases find exact matches like "renewable energy." Vector databases find meaning. They can find "solar power" even when you search for "clean energy."
+
+It's like a library that groups books by topic, not just A-Z. Ask about one topic, and you'll find all related ideas.
+
 ### The Retrieval Process Step by Step
+
+First, you prepare your documents:
+
+- Gather the documents you want the AI to use
+- Break them into small chunks (like paragraphs)
+- Turn each chunk into an embedding
+- Store them in a vector database for quick searching
+
+This is like organizing a filing system. You collect papers, sort them, label them, and put them in cabinets for later.
 
 When you ask a question, RAG:
 
