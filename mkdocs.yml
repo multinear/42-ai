@@ -1,0 +1,79 @@
+site_name: Multinear 42 AI
+site_url: https://multinear.com/42
+theme:
+  name: material
+  features:
+    - search.suggest
+    - search.highlight
+    - navigation.tabs
+    # - navigation.tabs.sticky
+    - navigation.footer
+    - navigation.indexes
+    - navigation.sections
+    - navigation.expand
+  font:
+    text: Inter
+  palette:
+    # Palette toggle for automatic mode
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/brightness-auto
+        name: Switch to light mode
+
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: blue grey
+      accent: blue
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: blue grey
+      accent: blue
+      toggle:
+        icon: material/brightness-4
+        name: Switch to system preference
+plugins:
+  - search
+  
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.critic
+  - pymdownx.caret
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.tilde
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.tabbed:
+      alternate_style: true
+  - attr_list
+  - md_in_html
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+
+# not_in_nav: |
+#   /tutorials/**/*.md
+
+nav:
+  - Start Here:
+    - index.md
+    - Tutorials:
+        - RAG: rag.md
+    - Guides:
+        - RAG How-To: guides/rag.md
+  - Multinear:
+    - Website: https://multinear.com
+  - Strawberry Bench 🍓:
+    - Website: https://multinear.github.io/strawberry-bench/
