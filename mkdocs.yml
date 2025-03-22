@@ -39,6 +39,9 @@ theme:
         name: Switch to system preference
 plugins:
   - search
+
+extra_css:
+  - stylesheets/extra.css
   
 markdown_extensions:
   - admonition
@@ -71,6 +74,7 @@ nav:
     - index.md
     - Tutorials:
         - RAG: rag.md
+        - rag-next.md
     - Guides:
         - RAG How-To: guides/rag.md
   - Multinear:

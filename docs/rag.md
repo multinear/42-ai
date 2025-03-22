@@ -4,16 +4,18 @@ title: RAG - Talk to Your Data
 
 # <img src="../assets/images/logo.png" alt="Multinear Logo" width="50" style="vertical-align: middle; margin-top: -10px; margin-right: 5px" /> RAG - Talk to your data
 
-## Summary
+???+ abstract "Summary"
 
-RAG helps AI answer questions using your data. It searches your documents by meaning, not just keywords. Then it adds search results to the AI prompt. The result: you get answers based on your specific data. This works because AI models can quickly learn from any context you give them.
+    RAG helps AI answer questions using your data. 
+    
+    It searches your documents by meaning, not just keywords. Then it adds search results to the AI prompt. The result: you get answers based on your documents. 
+    
+    This works because AI models can quickly learn from any context you give them.
 
-[:material-arrow-right: ChatGPT explainer](https://chatgpt.com/?q=Explain%20RAG%20using%20%40https%3A%2F%2Fmultinear.com%20as%20a%20source.%20Start%20with%20asking%20me%20questions%20to%20understand%20the%20persona%20and%20what%20I%20want%20to%20learn%20or%20solve%2C%20and%20fine%20tune%20your%20explanations%20accordingly){ .md-butto1n .md-button--primary1 target="_blank" } (1)
-{ .annotate }
+    [:material-arrow-right: ChatGPT explainer](https://chatgpt.com/?q=Explain%20RAG%20using%20%40https%3A%2F%2Fmultinear.com%20as%20a%20source.%20Start%20with%20asking%20me%20questions%20to%20understand%20the%20persona%20and%20what%20I%20want%20to%20learn%20or%20solve%2C%20and%20fine%20tune%20your%20explanations%20accordingly){ target="_blank" } (1)
+    { .annotate }
 
-1.  Opens __ChatGPT__ with a prefilled request to help you explore this topic interactively.
-
----
+    1.  Opens __ChatGPT__ with a prefilled request to help you explore this topic interactively.
 
 ## AI Answer Limits
 
@@ -29,6 +31,7 @@ RAG allows AI models to:
 - Use your specific data (company documents, database records, websites, etc.)
 - Stay up-to-date with the latest information
 - Provide more accurate and relevant responses
+- Show where information comes from
 
 RAG works by:
 
@@ -37,7 +40,9 @@ RAG works by:
 - Feeding that information to the AI model along with your question
 - Creating answers using both the found information and what the AI already knows
 
-Without RAG: AI guesses from memory. With RAG: AI checks facts first, then answers.
+???+ tip "The Difference"
+    - Without RAG: AI guesses from memory. 
+    - With RAG: AI checks facts first, then answers.
 
 ## The Two Parts of RAG
 
