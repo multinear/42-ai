@@ -86,44 +86,51 @@ Generation is where the AI:
 
 The magic happens when these parts work together. Retrieval finds the facts, and generation crafts them into useful answers.
 
-It's like a student researching a paper. First they gather sources (retrieval). Then they write the paper using those sources (generation).
+???+ tip "Example"
+    It's like a student researching a paper. First they gather sources (retrieval). Then they write the paper using those sources (generation).
 
 <img src="../assets/images/rag-architecture.png" alt="RAG architecture" />
 
 ---
 
-## How Retrieval Works
+## Key RAG Concepts
 
-Let's look deeper at how RAG finds relevant information.
+Here are the essential concepts that make RAG work. For detailed technical implementation, see our [RAG Technical Guide](rag-technical.md).
 
-### Embeddings: Understanding Meaning
+### Embeddings
 
-Computers don't understand language like we do. They need a way to measure how similar different texts are. That's where embeddings come in.
+Computers don't understand language like we do. They need a way to measure how similar different texts are. That's where embeddings come in. 
 
 **Embeddings** are like digital maps of meaning. They:
 
 - Convert words and sentences into numbers (vectors)
 - Position similar meanings nearby, creating groups of related concepts
-- Allow computers to find information based on meaning, not exact words
+- Allow AI to find similar content even when the words are different
 
-Example: Ask about "car prices" and it finds "automobile costs" too. Why? Their embeddings are similar.
+???+ tip "Example"
+    Ask for "car prices" and it finds "automobile costs" too. Their embeddings are similar.
 
-### Chunking: Breaking Down Knowledge
+[Learn more about embeddings :material-arrow-right:](rag-technical.md#embeddings)
+
+### Chunking
 
 Large documents contain too much information to process all at once. RAG solves this by:
 
-- Breaking documents into smaller pieces called "chunks"
+- Breaking documents into smaller pieces called "**chunks**"
 - Creating embeddings for each chunk
 - Storing these chunks and their embeddings in a database
-- Searching for the most relevant chunks for that specific question
+- Searching for the most relevant chunks for each question
 
-Think of chunking like creating flashcards from a textbook. Each card holds just enough useful information. Not too little. Not too much.
+???+ tip "Tip"
+    Think of chunking like creating flashcards from a textbook. Each card holds just enough useful information. Not too little. Not too much.
 
-### Vector Databases: Where Meaning Is Stored
+[Learn more about chunking :material-arrow-right:](rag-technical.md#chunking)
 
-RAG systems need special databases to store and search embeddings efficiently.
+### Vector Databases
 
-**Vector databases** are specialized storage systems that:
+RAG must be able to store and search embeddings quickly.
+
+**Vector databases** are special storage systems that:
 
 - Store thousands or millions of embeddings (numbers that represent meaning)
 - Find similar meanings very quickly
@@ -131,101 +138,44 @@ RAG systems need special databases to store and search embeddings efficiently.
 
 Normal databases find exact matches like "renewable energy." Vector databases find meaning. They can find "solar power" even when you search for "clean energy."
 
-It's like a library that groups books by topic, not just A-Z. Ask about one topic, and you'll find all related ideas.
+???+ tip "Example"
+    It's like a library that groups books by topic, not just A-Z. Ask about one topic, and you'll find all related ideas.
 
-### The Retrieval Process Step by Step
+[Learn more about vector databases :material-arrow-right:](rag-technical.md#vector-databases)
 
-First, you prepare your documents:
+### Prompt Engineering
 
-- Gather the documents you want the AI to use
-- Break them into small chunks (like paragraphs)
-- Turn each chunk into an embedding
-- Store them in a vector database for quick searching
+Careful instructions to the AI are crucial for RAG to work properly.
 
-This is like organizing a filing system. You collect papers, sort them, label them, and put them in cabinets for later.
+**Prompt engineering** ensures that:
 
-When you ask a question, RAG:
+- The AI knows which information to trust most
+- It uses the retrieved chunks to answer questions
+- It admits when it doesn't have enough information
+- It includes sources in its answers when possible
 
-- Converts your question into an embedding
-- Compares it with all the chunk embeddings in the database
-- Finds chunks with the most similar embeddings (meaning they're relevant)
-- Selects the best matches to send to the generation step
+???+ tip "Example"
+    A RAG prompt might say: "Use ONLY the following information to answer the question. If you don't know, just say so."
 
-This is much more powerful than keyword search. RAG finds relevant information even when words don't match. It understands meaning, not just keywords.
+[Learn more about prompt engineering :material-arrow-right:](rag-technical.md#prompt-engineering)
 
----
+### How RAG Works in Practice
 
-## How Generation Works
+Here's what happens when you use RAG:
 
-Now let's explore how RAG uses the retrieved information to create answers.
+1. **Get Your Data Ready**: Collect your documents. Break them into small pieces. Turn them into embeddings. Store them in a special database.
 
-### Combining Information Sources
+2. **Ask a Question**: RAG turns your question into an embedding too. Then it finds chunks that match your question's meaning.
 
-The generation part of RAG:
+3. **Create an Answer**: The AI reads your question and the matching chunks. Then it writes a helpful response based on both.
 
-- Takes your original question
-- Takes the retrieved chunks of information
-- Combines them into a special prompt
-- Sends this to the AI model for processing
-
-Think of it like giving the AI both your question and reference materials to work with.
-
-### Prompt Engineering for RAG
-
-The way information is structured in the prompt matters a lot:
-
-- Clear instructions tell the AI how to use the retrieved information
-- The question appears with context about what you're asking
-- Retrieved information is clearly marked as reference material
-- The AI is told to answer based on the references when possible
-
-A RAG prompt might say: "Use ONLY the following information to answer the question. If you don't know, say so."
-
-### Context Window Management
-
-Most AI models have limits on how much text they can process at once:
-
-- This is called the "context window"
-- Retrieved information must fit within this window
-- Too many chunks won't fit
-- Too few might miss important details
-
-Finding the right balance is crucial for good results.
-
-### Citation and Sourcing
-
-Good RAG systems:
-
-- Track where each piece of information came from
-- Tell the AI to mention these sources in responses
-- Help users verify the information
-- Build trust in the answers
-
-Example: "According to the 2023 Company Policy (page 4), employees can work remotely up to 3 days per week."
-
-### Answer Formatting
-
-The generation step can control how answers appear:
-
-- Bullet points for lists
-- Headers for organization
-- Tables for structured data
-- Natural paragraphs for explanations
-
-The AI adapts its response format based on the question type and retrieved information.
-
-### What Makes Generation Powerful
-
-RAG's generation is special because:
-
-- It blends retrieved facts with language skills
-- It can explain complex information simply
-- It can tailor responses to different user types
-- It can admit when information is missing
-
-Unlike regular search, RAG doesn't just find information—it makes it useful.
-
+4. **Show Sources**: Good RAG systems tell you where they found the information. This helps you trust the answer.
 
 ---
 
-[Read the RAG guide :material-arrow-right:](guides/rag.md)
+## Next Steps
+
+Ready to explore RAG in more depth?
+
+- [RAG Technical Guide :material-arrow-right:](rag-technical.md) Detailed information on building RAG systems
+- [RAG How-To :material-arrow-right:](guides/rag.md) Step-by-step instructions for implementing RAG

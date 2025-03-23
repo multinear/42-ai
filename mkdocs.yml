@@ -72,8 +72,9 @@ markdown_extensions:
 nav:
   - Start Here:
     - index.md
-    - Tutorials:
-        - RAG: rag.md
+    - RAG:
+        - Overview: rag.md
+        - Technical Guide: rag-technical.md
         - rag-next.md
     - Guides:
         - RAG How-To: guides/rag.md

@@ -6,7 +6,7 @@ title: RAG - Talk to Your Data
 
 !!! note
 
-    We recommend reading [RAG tutorial](../rag.md) first.
+    We recommend reading [RAG Overview](../rag.md) first.
 
 ## Guide
 
