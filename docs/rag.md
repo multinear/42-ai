@@ -95,7 +95,7 @@ The magic happens when these parts work together. Retrieval finds the facts, and
 
 ## Key RAG Concepts
 
-Here are the essential concepts that make RAG work. For detailed technical implementation, see our [RAG Technical Guide](rag-technical.md).
+Here are the essential concepts that make RAG work. For detailed technical implementation, see our [RAG Technical Guide](rag/technical.md).
 
 ### Embeddings
 
@@ -110,7 +110,7 @@ Computers don't understand language like we do. They need a way to measure how s
 ???+ tip "Example"
     Ask for "car prices" and it finds "automobile costs" too. Their embeddings are similar.
 
-[Learn more about embeddings :material-arrow-right:](rag-technical.md#embeddings)
+[Learn more about embeddings :material-arrow-right:](rag/technical.md#embeddings)
 
 ### Chunking
 
@@ -124,7 +124,7 @@ Large documents contain too much information to process all at once. RAG solves 
 ???+ tip "Tip"
     Think of chunking like creating flashcards from a textbook. Each card holds just enough useful information. Not too little. Not too much.
 
-[Learn more about chunking :material-arrow-right:](rag-technical.md#chunking)
+[Learn more about chunking :material-arrow-right:](rag/technical.md#chunking)
 
 ### Vector Databases
 
@@ -141,7 +141,7 @@ Normal databases find exact matches like "renewable energy." Vector databases fi
 ???+ tip "Example"
     It's like a library that groups books by topic, not just A-Z. Ask about one topic, and you'll find all related ideas.
 
-[Learn more about vector databases :material-arrow-right:](rag-technical.md#vector-databases)
+[Learn more about vector databases :material-arrow-right:](rag/technical.md#vector-databases)
 
 ### Prompt Engineering
 
@@ -157,7 +157,7 @@ Careful instructions to the AI are crucial for RAG to work properly.
 ???+ tip "Example"
     A RAG prompt might say: "Use ONLY the following information to answer the question. If you don't know, just say so."
 
-[Learn more about prompt engineering :material-arrow-right:](rag-technical.md#prompt-engineering)
+[Learn more about prompt engineering :material-arrow-right:](rag/technical.md#prompt-engineering)
 
 ### How RAG Works in Practice
 
@@ -177,5 +177,5 @@ Here's what happens when you use RAG:
 
 Ready to explore RAG in more depth?
 
-- [RAG Technical Guide :material-arrow-right:](rag-technical.md) Detailed information on building RAG systems
+- [RAG Technical Guide :material-arrow-right:](rag/technical.md) Detailed information on building RAG systems
 - [RAG How-To :material-arrow-right:](guides/rag.md) Step-by-step instructions for implementing RAG

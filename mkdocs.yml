@@ -74,7 +74,7 @@ nav:
     - index.md
     - RAG:
         - Overview: rag.md
-        - Technical Guide: rag-technical.md
+        - Technical Guide: rag/technical.md
         - rag-next.md
     - Guides:
         - RAG How-To: guides/rag.md

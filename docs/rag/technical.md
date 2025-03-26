@@ -2,7 +2,57 @@
 title: RAG - Technical Guide
 ---
 
-# <img src="../assets/images/logo.png" alt="Multinear Logo" width="50" style="vertical-align: middle; margin-top: -10px; margin-right: 5px" /> RAG - Technical Guide
+# <img src="../../assets/images/logo.png" alt="Multinear Logo" width="50" style="vertical-align: middle; margin-top: -10px; margin-right: 5px" /> RAG - Technical Guide
+
+
+???+ abstract "Before you begin"
+    This guide assumes you've read the [RAG Tutorial](rag.md) and understand the basic concepts. Here, we'll explore best practices and techniques for building production-ready, reliable RAG systems.
+
+## Introduction
+
+The RAG concept is straightforward: {++retrieve relevant content++} → {++feed it to AI++}. 
+
+Building an effective RAG system requires attention to multiple technical aspects:
+
+- Document processing pipelines
+- Embeddings
+- Chunking strategies
+- Vector storage
+- Retrieval algorithms
+- Prompt engineering
+- Evaluation methods
+
+## Retrieval
+
+LLMs are very sensitive to the input. Irrelevant or noisy content can harm response quality. Garbage in equals garbage out.
+
+- **Length limits:** Even models with large context windows can't include all documents
+- **Quality issues**: Too much irrelevant info makes answers less helpful
+- **Hallucination risk**: When key facts are missing, model can make up information
+- **Efficiency**: Better content selection reduces costs and improves speed
+
+### Retrieval Process
+
+The retrieval process has two phases:
+
+#### 1. Preparation Phase
+
+- Document processing: Convert documents into plain text
+- Metadata: Extract useful info from documents
+- Chunking: Split documents into manageable pieces (chunks)
+- Indexing: Create vector embeddings and other search indices
+
+#### 2. Query Phase
+
+- Content discovery: Find the most relevant text chunks for the user's question
+- Answer generation: Produce a response using the retrieved content
+
+This approach connects user questions to your data, giving AI access to key facts it needs.
+
+
+---
+
+---
 
 This document covers the technical aspects of implementing RAG systems. For a high-level overview, see the [RAG Overview](rag.md).
 
