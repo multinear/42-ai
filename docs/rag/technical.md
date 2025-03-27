@@ -15,9 +15,8 @@ The RAG concept is straightforward: {++retrieve relevant content++} → {++feed 
 Building an effective RAG system requires attention to multiple technical aspects:
 
 - Document processing pipelines
-- Embeddings
 - Chunking strategies
-- Vector storage
+- Embeddings & vector storage
 - Retrieval algorithms
 - Prompt engineering
 - Evaluation methods
@@ -31,158 +30,128 @@ LLMs are very sensitive to the input. Irrelevant or noisy content can harm respo
 - **Hallucination risk**: When key facts are missing, model can make up information
 - **Efficiency**: Better content selection reduces costs and improves speed
 
-### Retrieval Process
-
 The retrieval process has two phases:
 
-#### 1. Preparation Phase
+**Preparation Phase**
 
 - Document processing: Convert documents into plain text
 - Metadata: Extract useful info from documents
 - Chunking: Split documents into manageable pieces (chunks)
 - Indexing: Create vector embeddings and other search indices
 
-#### 2. Query Phase
+**Query Phase**
 
 - Content discovery: Find the most relevant text chunks for the user's question
 - Answer generation: Produce a response using the retrieved content
 
 This approach connects user questions to your data, giving AI access to key facts it needs.
 
+---
+
+### Preparation
+
+Before any user asks a question, we need to prepare our documents for retrieval. This creates the foundation that makes fast, accurate responses possible.
+
+#### Document Processing
+
+**Problem**
+
+- Raw documents come in formats AI can't directly use (PDFs, Word docs, HTML, images, videos)
+- Many documents contain duplicate content, inconsistent formatting, or poor organization
+- Complex elements like tables, code blocks, and formulas get lost in simple text extraction
+- PDFs often contain images of text that require OCR before processing
+
+
+**Solution**
+
+- Convert all documents to plain text that AI systems can process
+- Remove duplicates and fix formatting issues
+- For very large documents, create summaries to reduce size
+- Extract tables into structured formats when possible
+- Keep track of the original source for each document
+
+[More about document processing :material-arrow-right:](rag/next-topics.md)
 
 ---
 
----
+#### Metadata Extraction
 
-This document covers the technical aspects of implementing RAG systems. For a high-level overview, see the [RAG Overview](rag.md).
+**Problem**
 
-## The Retrieval Process in Detail
+- Plain text lacks critical context about document source, age, and relevance
+- We need ways to filter large document collections for specific sources or dates
+- Without source information, users can't verify the reliability of retrieved information
+- Ranking becomes difficult when all documents are treated equally
 
-### Embeddings
+**Solution**
 
-**Embeddings** are numerical representations of text that capture meaning. They are the foundation of semantic search in RAG systems.
+- Extract and store key information about each document:
+    - Title, author, creation date, last modified date
+    - Source/department/team
+    - Document type and category
+    - For PDFs: page numbers, section titles
+    - For websites: URL, section headers
 
-Embeddings work by:
-
-- Converting words and sentences into vectors (lists of numbers)
-- Positioning similar meanings nearby in vector space
-- Creating a mathematical space where semantic relationships can be measured
-- Allowing computers to find information based on meaning, not just exact matches
-
-Example: When you ask about "car prices," the system can find content about "automobile costs" because their embeddings are close in vector space.
-
-Popular embedding models include:
-- OpenAI's text-embedding models
-- BERT and its variants
-- Sentence transformers
-
-### Chunking
-
-Effective chunking is critical for RAG performance. Here's how to approach it:
-
-- Break documents into smaller pieces that contain coherent information
-- Chunk size depends on your content (paragraphs work for articles, but code might need function-level chunks)
-- Consider overlap between chunks to avoid losing context at boundaries
-- Maintain metadata about where chunks came from to enable citations
-
-Chunking approaches include:
-- Fixed-size chunks (by tokens or characters)
-- Semantic chunking (based on content boundaries)
-- Hierarchical chunking (preserving document structure)
-
-### Vector Databases
-
-RAG systems store embeddings in specialized vector databases that enable efficient similarity search.
-
-**Vector databases** offer:
-- Approximate nearest neighbor (ANN) algorithms for fast similarity search
-- Scaling to millions or billions of vectors
-- Support for metadata filtering
-- Various distance metrics (cosine, Euclidean, dot product)
-
-Popular vector databases and libraries include:
-- Pinecone
-- Weaviate
-- FAISS (Facebook AI Similarity Search)
-- Qdrant
-- pgvector (PostgreSQL extension)
-- Chroma
-
-## Generation Techniques
-
-### Prompt Engineering Best Practices
-
-Effective RAG depends on how information is structured in prompts:
-
-- Use clear instructions to guide the model's use of retrieved information
-- Structure your prompt with clear sections for context, question, and retrieved information
-- Explicitly tell the model to prefer retrieved information and admit when information is missing
-- Consider few-shot examples for complex response formats
-
-Example prompt template:
-```
-You are an assistant that answers questions based only on the provided context.
-
-Context:
-{retrieved_chunks}
-
-Question: {user_question}
-
-Answer the question using only the provided context. If you cannot answer based on the context, say "I don't have enough information to answer this question."
+```python
+# Example structure
+doc_metadata = {
+    "title": "Q4 Financial Report",
+    "author": "Finance Team",
+    "date": "2023-12-15",
+    "department": "Finance",
+    "document_type": "Quarterly Report",
+    "source_url": "internal/finance/reports/q4_2023.pdf"
+}
 ```
 
-### Context Window Management
-
-LLMs have token limits that constrain how much text they can process:
-
-- GPT-4 can handle up to 128k tokens in its context window
-- Claude models have varying context limits from 8k to 200k tokens
-- Open-source models like Llama have context windows from 4k to 32k tokens
-
-Strategies for managing context windows:
-- Rank chunks by relevance and include only the top N
-- Compress or summarize retrieved chunks before including them
-- Use hierarchical retrieval (retrieve summaries first, then details)
-- Implement document routing to choose which documents to search
-
-### Citation and Sourcing Systems
-
-Good RAG systems maintain traceability from answer to source:
-
-- Store document metadata alongside chunks (source, page number, URL, timestamp)
-- Pass this metadata through the retrieval process
-- Include citation instructions in prompts
-- Post-process responses to verify and format citations
-- Consider relevance and confidence scores for each citation
-
-### Response Formatting Techniques
-
-Control how the model formats answers by:
-- Using output parsers to ensure consistent formatting
-- Defining expected response schemas
-- Implementing post-processing for validation and correction
-- Using few-shot examples to demonstrate desired formats
-
-## Evaluation and Improvement
-
-### RAG Evaluation Metrics
-
-Measure your RAG system's performance with:
-- Relevance: Are retrieved chunks related to the question?
-- Groundedness: Does the answer follow from the retrieved information?
-- Answer correctness: Is the final answer accurate?
-- Citation accuracy: Are sources cited correctly?
-- Response latency: How quickly does the system respond?
-
-### Improving RAG Systems
-
-Enhance your RAG implementation by:
-- Fine-tuning embedding models on your domain data
-- Experimenting with chunking strategies
-- Implementing re-ranking after initial retrieval
-- Adding query expansion or reformulation
-- Incorporating user feedback loops
+[More about metadata extraction :material-arrow-right:](rag/next-topics.md)
 
 ---
 
-[← Back to RAG Introduction](rag.md)
+#### Chunking
+
+**Problem**
+
+- Large documents won't fit in the AI's context window
+- Smaller chunks help find precisely relevant content
+- Good chunking reduces noise in responses
+- Preserving document structure improves context
+
+**Solution**
+
+- Split documents into smaller pieces (chunks)
+- Use natural boundaries when possible:
+    - Paragraphs
+    - Sections with headings
+    - List items
+    - Pages
+- Consider chunk size carefully:
+    - Too small: loses context
+    - Too large: reduces precision
+- Add some overlap between chunks (10-20%) to maintain context
+- Preserve hierarchy and structure when possible
+
+[More about chunking :material-arrow-right:](rag/next-topics.md)
+
+---
+
+#### Indexing & Embeddings
+
+**Problem**
+
+- Embeddings capture meaning beyond exact words
+- Proper indexing enables fast retrieval at scale
+- Combining approaches (hybrid search) improves results
+
+**Solution**
+
+- Generate embeddings for each chunk:
+  - Choose an embedding model appropriate for your needs
+  - Consider dimensions, quality, and speed tradeoffs
+- Store embeddings in a vector database
+- Create additional indexes for keywords and metadata
+- Consider building a hybrid search system
+
+[More about indexing & embeddings :material-arrow-right:](rag/next-topics.md)
+
+In the next section, we'll cover what happens during the Query Phase, when a user actually asks a question.

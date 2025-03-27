@@ -75,7 +75,7 @@ nav:
     - RAG:
         - Overview: rag.md
         - Technical Guide: rag/technical.md
-        - rag-next.md
+        - rag/next-topics.md
     - Guides:
         - RAG How-To: guides/rag.md
   - Multinear:
